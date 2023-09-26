@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     formData.append('model', 'whisper-1');
 
     const WHISPER_API_ENDPOINT = "https://api.openai.com/v1/audio/transcriptions";
-    const TOKEN = process.env.OPEN_AI_KEY;
+    const TOKEN = process.env.OPENAI_API_KEY;
 
     const response = await axios.post(WHISPER_API_ENDPOINT, formData, {
       headers: {
