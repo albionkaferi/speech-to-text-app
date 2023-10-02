@@ -91,13 +91,19 @@ const AudioInput = () => {
       console.error('Failed to send audio', error);
     }
   }; 
+
+  const restart = () => {
+    setAudioUrl(null);
+    setShowOutput(false);
+    setTransitionCompleted(false);
+  }
   
   return (
     <>
     {!showOutput ? 
-      <div id='wrapper' className={`flex justify-center items-center transition-all duration-700 ease-in-out ${ audioUrl ? "bg-neutral-100 w-[400px] h-[200px] rounded-2xl" : "bg-teal-300 w-20 h-20 rounded-[50%]"}`}>
+      <div id='wrapper' className={`flex justify-center items-center transition-all duration-700 ease-in-out ${ audioUrl ? "bg-neutral-100 w-[400px] h-[200px] rounded-2xl" : "bg-teal-400 w-20 h-20 rounded-[50%]"}`}>
           {!audioUrl ?
-            <button className='flex justify-center items-center bg-teal-400 rounded-full h-20 w-20 shadow-xl shadow-teal-300' onClick={recording ? stopRecording : startRecording}>
+            <button className={`flex justify-center items-center bg-teal-400 rounded-full h-20 w-20 shadow-xl shadow-teal-300 ${recording ? "animate-pulse" : ""}`} onClick={recording ? stopRecording : startRecording}>
               {recording ?
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 stroke-white">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" />
@@ -113,7 +119,7 @@ const AudioInput = () => {
             <div className='w-full px-4 space-y-4 flex flex-col items-center'>
               <div className='space-x-4'>
                 <button className='py-2 px-3 rounded-full bg-teal-400 text-white' onClick={onTranscribe}>Transcribe</button>
-                <button className='py-2 px-3 rounded-full border border-teal-400 text-teal-400'>Restart</button>
+                <button className='py-2 px-3 rounded-full border border-teal-400 text-teal-400' onClick={restart}>Restart</button>
               </div>
               <audio src={audioUrl as string} controls className=''/>
             </div>
@@ -122,7 +128,8 @@ const AudioInput = () => {
     : ( loading ? 
         <Lottie animationData={cubes} loop={true} /> 
         :
-        <div className='max-w-md w-1/2 p-4 bg-neutral-100 rounded-md divide-y-2'>
+        <div className='flex flex-col max-w-md w-1/2 space-y-4'>
+        <div className='p-4 bg-neutral-100 rounded-md divide-y-2'>
           <div className='flex justify-between items-center mb-2'>
             <h1>Result</h1>
             <button>copy</button>
@@ -130,6 +137,8 @@ const AudioInput = () => {
           <p className='pt-2 '>
             {transcription}
           </p>
+        </div>
+        <button className='py-2 px-3 rounded-full border border-teal-400 text-teal-400' onClick={restart}>Restart</button>
         </div>
       )
     }
