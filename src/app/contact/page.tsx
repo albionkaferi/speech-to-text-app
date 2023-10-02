@@ -1,7 +1,7 @@
 export default function Contact() {
   return (
     <div className="flex justify-center items-center">
-      <p>
+      <p className="w-9/12 text-center">
         Send suggestions, issues, and other inquiries to&nbsp;
         <a
           href="mailto:kevinkaferi@gmail.com"

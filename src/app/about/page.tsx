@@ -38,7 +38,7 @@ export default function About() {
       </h1>
       <Accordion type="single" collapsible className="w-9/12">
         {faq.map((item) => (
-          <AccordionItem value={item.value}>
+          <AccordionItem value={item.value} key={item.value}>
             <AccordionTrigger>{item.trigger}</AccordionTrigger>
             <AccordionContent>{item.content}</AccordionContent>
           </AccordionItem>
