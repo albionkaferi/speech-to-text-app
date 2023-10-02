@@ -1,5 +1,15 @@
 export default function Contact() {
-    return (
-        <p>in progress...come back soon</p>
-    )
+  return (
+    <div className="flex justify-center items-center">
+      <p>
+        Send suggestions, issues, and other inquiries to&nbsp;
+        <a
+          href="mailto:kevinkaferi@gmail.com"
+          className="text-blue-400 underline"
+        >
+          kevinkaferi@gmail.com
+        </a>
+      </p>
+    </div>
+  );
 }
