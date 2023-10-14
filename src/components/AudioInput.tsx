@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
-import cubes from "../../public/cubes.json";
+import loadingAnimation from "../../public/loading.json";
 import RecordButton from "./RecordButton";
 
 type AudioData = Blob | null;
@@ -174,7 +174,16 @@ const AudioInput = () => {
           </div>
         </div>
       ) : loading ? (
-        <Lottie animationData={cubes} loop={true} />
+        <Lottie
+          animationData={loadingAnimation}
+          loop={true}
+          style={{
+            width: 600,
+            height: 500,
+            overflow: "hidden",
+            position: "relative",
+          }}
+        />
       ) : (
         <div className="flex flex-col max-w-md w-1/2 space-y-4">
           <div className="p-4 bg-neutral-100 rounded-md divide-y-2">
