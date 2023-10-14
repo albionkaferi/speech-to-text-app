@@ -27,7 +27,7 @@ const AudioInput = () => {
       return () => {
         wrapperElement.removeEventListener(
           "transitionend",
-          handleTransitionEnd,
+          handleTransitionEnd
         );
       };
     }
@@ -114,41 +114,64 @@ const AudioInput = () => {
   return (
     <>
       {!showOutput ? (
-        <div
-          id="wrapper"
-          className={`flex justify-center items-center transition-all duration-700 ease-in-out ${
-            audioUrl
-              ? "bg-neutral-100 w-[400px] h-[200px] rounded-2xl"
-              : "bg-teal-400 w-20 h-20 rounded-[50%]"
-          }`}
-        >
-          {!audioUrl ? (
-            <RecordButton
-              recording={recording}
-              startRecording={startRecording}
-              stopRecording={stopRecording}
-            />
-          ) : (
-            transitionCompleted && (
-              <div className="w-full px-4 space-y-4 flex flex-col items-center">
-                <div className="space-x-4">
-                  <button
-                    className="py-2 px-3 rounded-full bg-teal-400 text-white"
-                    onClick={onTranscribe}
-                  >
-                    Transcribe
-                  </button>
-                  <button
-                    className="py-2 px-3 rounded-full border border-teal-400 text-teal-400"
-                    onClick={restart}
-                  >
-                    Restart
-                  </button>
-                </div>
-                <audio src={audioUrl as string} controls className="" />
-              </div>
-            )
+        <div className="flex flex-col items-center space-y-8">
+          {!audioUrl && (
+            <div className="flex flex-col items-center space-y-4">
+              <h2 className="text-lg">
+                {recording ? "Listening..." : "Start Recording Below"}
+              </h2>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                className="w-6 h-6 animate-bounce"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+                />
+              </svg>
+            </div>
           )}
+          <div
+            id="wrapper"
+            className={`flex justify-center items-center transition-all duration-700 ease-in-out ${
+              audioUrl
+                ? "bg-neutral-100 w-[400px] h-[200px] rounded-2xl"
+                : "bg-teal-400 w-20 h-20 rounded-[50%]"
+            }`}
+          >
+            {!audioUrl ? (
+              <RecordButton
+                recording={recording}
+                startRecording={startRecording}
+                stopRecording={stopRecording}
+              />
+            ) : (
+              transitionCompleted && (
+                <div className="w-full px-4 space-y-4 flex flex-col items-center">
+                  <div className="space-x-4">
+                    <button
+                      className="py-2 px-3 rounded-full bg-teal-400 text-white"
+                      onClick={onTranscribe}
+                    >
+                      Transcribe
+                    </button>
+                    <button
+                      className="py-2 px-3 rounded-full border border-teal-400 text-teal-400"
+                      onClick={restart}
+                    >
+                      Restart
+                    </button>
+                  </div>
+                  <audio src={audioUrl as string} controls className="" />
+                </div>
+              )
+            )}
+          </div>
         </div>
       ) : loading ? (
         <Lottie animationData={cubes} loop={true} />
