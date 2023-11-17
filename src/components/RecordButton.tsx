@@ -10,8 +10,8 @@ export default function RecordButton({
   startRecording,
 }: RecordButtonProps) {
   return (
-    <div className="relative">
-      <div className="absolute -inset-1 bg-teal-400 rounded-full blur"></div>
+    <div className="relative group">
+      <div className="absolute -inset-1 bg-teal-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
 
       <button
         className={`relative flex justify-center items-center bg-teal-400 rounded-full h-20 w-20 ${
