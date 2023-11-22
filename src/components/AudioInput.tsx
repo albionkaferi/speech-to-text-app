@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Lottie from "lottie-react";
 import loadingAnimation from "../../public/loading.json";
 import RecordButton from "./RecordButton";
+import { toast } from "sonner";
 
 type AudioData = Blob | null;
 
@@ -83,7 +84,7 @@ const AudioInput = () => {
 
   const sendAudioToServer = async (audioBlob: Blob) => {
     try {
-      const response = await fetch("/api", {
+      const response = await fetch("/api/transcribe", {
         method: "POST",
         body: audioBlob,
         headers: {
@@ -93,7 +94,7 @@ const AudioInput = () => {
       const data = await response.json();
       return data.transcription.text;
     } catch (error) {
-      console.error("Failed to send audio", error);
+      toast.error("Failed to send audio.");
     }
   };
 
