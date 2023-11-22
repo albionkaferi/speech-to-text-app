@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   try {
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'kevinkaferi@gmail.com',
+      to: 'albion-2012@hotmail.com',
       subject: `Transcribely`,
       text: `Name: ${body.name}\nEmail: ${body.email}\nMessage: ${body.message}`,
     });
