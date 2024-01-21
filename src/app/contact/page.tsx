@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 export default function Contact() {
   return (
     <div className="flex flex-col items-center space-y-2">
-      <div className="flex flex-col items-center space-y-1 mb-8">
+      <div className="flex flex-col items-center space-y-1 mb-4">
         <h1 className="font-extrabold text-2xl">Contact Us</h1>
         <h2>Send suggestions, issues, and other inquiries.</h2>
         <div>

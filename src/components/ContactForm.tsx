@@ -103,7 +103,9 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Send</Button>
+        <Button type="submit" className="w-full">
+          Send
+        </Button>
       </form>
     </Form>
   );
