@@ -74,3 +74,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .btn-primary {
+    @apply rounded-full bg-teal-400 text-white font-semibold hover:bg-teal-500;
+  }
+  .btn-secondary {
+    @apply rounded-full border-[1.5px] border-teal-400 text-teal-400 font-semibold hover:bg-teal-400 hover:text-white transition-all duration-300 ease-in-out;
+  }
+}

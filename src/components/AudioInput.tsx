@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Lottie from "lottie-react";
-import loadingAnimation from "../../public/loading.json";
 import RecordButton from "./RecordButton";
 import { toast } from "sonner";
 import Dots from "./Dots";
@@ -11,13 +9,13 @@ import Output from "./Output";
 type AudioData = Blob | null;
 
 const AudioInput = () => {
-  const [recording, setRecording] = useState<boolean>(false);
+  const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<any | null>(null);
   const [transitionCompleted, setTransitionCompleted] = useState(false);
-  const [transcription, setTranscription] = useState<string>("");
-  const [showOutput, setShowOutput] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [transcription, setTranscription] = useState("");
+  const [showOutput, setShowOutput] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const wrapperElement = document.getElementById("wrapper");
@@ -107,11 +105,6 @@ const AudioInput = () => {
 
   return (
     <div className="relative w-full h-[400px] flex justify-center items-center overflow-hidden">
-      {!audioUrl && (
-        <div className="absolute top-1/2 left-1/2">
-          <Dots />
-        </div>
-      )}
       {!showOutput ? (
         <div
           id="wrapper"
@@ -122,46 +115,45 @@ const AudioInput = () => {
           }`}
         >
           {!audioUrl ? (
-            <RecordButton
-              recording={recording}
-              startRecording={startRecording}
-              stopRecording={stopRecording}
-            />
+            <>
+              <div className="absolute top-1/2 left-1/2">
+                <Dots />
+              </div>
+              <RecordButton
+                recording={recording}
+                startRecording={startRecording}
+                stopRecording={stopRecording}
+              />
+            </>
           ) : (
             transitionCompleted && (
               <div className="w-full px-4 space-y-4 flex flex-col items-center">
                 <div className="space-x-4">
                   <button
-                    className="py-2 px-3 rounded-full bg-teal-400 text-white"
+                    className="w-40 py-2 btn-primary"
                     onClick={onTranscribe}
                   >
                     Transcribe
                   </button>
-                  <button
-                    className="py-2 px-3 rounded-full border border-teal-400 text-teal-400"
-                    onClick={restart}
-                  >
+                  <button className="w-24 py-2 btn-secondary" onClick={restart}>
                     Restart
                   </button>
                 </div>
-                <audio src={audioUrl as string} controls className="" />
+                <audio
+                  src={audioUrl as string}
+                  controls
+                  className="w-72 border rounded-full"
+                />
               </div>
             )
           )}
         </div>
-      ) : loading ? (
-        <Lottie
-          animationData={loadingAnimation}
-          loop={true}
-          style={{
-            width: 600,
-            height: 500,
-            overflow: "hidden",
-            position: "relative",
-          }}
-        />
       ) : (
-        <Output transcription={transcription} restart={restart} />
+        <Output
+          transcription={transcription}
+          loading={loading}
+          restart={restart}
+        />
       )}
     </div>
   );

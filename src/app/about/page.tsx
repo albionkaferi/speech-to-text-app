@@ -80,6 +80,17 @@ const faq = [
 export default function About() {
   return (
     <div className="flex flex-col items-center">
+      <h1 className="font-extrabold text-2xl mb-6">
+        Frequently Asked Questions
+      </h1>
+      <Accordion type="single" collapsible className="w-9/12 mb-12">
+        {faq.map((item) => (
+          <AccordionItem value={item.value} key={item.value}>
+            <AccordionTrigger>{item.trigger}</AccordionTrigger>
+            <AccordionContent>{item.content}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
       <h1 className="font-extrabold text-2xl mb-6">Use Cases</h1>
       <div className="grid md:grid-cols-2 gap-4 place-content-center mb-8">
         {uses.map((item, index) => (
@@ -95,17 +106,6 @@ export default function About() {
           </div>
         ))}
       </div>
-      <h1 className="font-extrabold text-2xl mb-6">
-        Frequently Asked Questions
-      </h1>
-      <Accordion type="single" collapsible className="w-9/12 mb-8">
-        {faq.map((item) => (
-          <AccordionItem value={item.value} key={item.value}>
-            <AccordionTrigger>{item.trigger}</AccordionTrigger>
-            <AccordionContent>{item.content}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
     </div>
   );
 }
